@@ -3,7 +3,7 @@
 
 Example config.json:
 
- ```
+```
     "accessories": [
         {
           "accessory": "DummySwitch",
@@ -18,3 +18,18 @@ With this plugin, you can create any number of fake switches that will do nothin
 For instance, the Philips Hue app will automatically create HomeKit scenes for you based on Hue Scenes you create. But what if you want to create a scene that contains both Philips Hue actions and other actions (like turning on the coffee maker with a WeMo outlet)? You are forced to either modify the Hue-created scene (which can be a HUGE list of actions if you have lots of lights) or build your own HomeKit lighting scenes.
 
 Instead, you can link scenes using these dummy switches. Let's say you have a Hue Scene called "Rise and Shine" that you want to activate in the morning. And you have also setup the system HomeKit scene "Good Morning" to turn on your coffee maker and disarm you security system. You can add a single dummy switch to your Good Morning scene, then create a Trigger based on the switching-on of the dummy switch that also activates Rise And Shine.
+
+## Stateful Switches
+
+The default behavior of a dummy switch is to turn itself off one second after being turned on. However you may want to create a dummy switch that remains on and must be manually turned off. You can do this by passing an argument in your config.json:
+
+```
+    "accessories": [
+        {
+          "accessory": "DummyStatefulSwitch",
+          "name": "My Stateful Switch 1",
+          "stateful": true
+        }   
+    ]
+
+```
