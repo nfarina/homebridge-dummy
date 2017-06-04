@@ -26,7 +26,7 @@ The default behavior of a dummy switch is to turn itself off one second after be
 ```
     "accessories": [
         {
-          "accessory": "DummyStatefulSwitch",
+          "accessory": "DummySwitch",
           "name": "My Stateful Switch 1",
           "stateful": true
         }   
