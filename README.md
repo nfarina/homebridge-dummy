@@ -33,3 +33,18 @@ The default behavior of a dummy switch is to turn itself off one second after be
     ]
 
 ```
+
+## Reverse Switches
+
+You may also want to create a dummy switch that turns itself on one second after being turned off. This can be done by passing the 'reverse' argument in your config.json:
+
+```
+    "accessories": [
+        {
+          "accessory": "DummySwitch",
+          "name": "My Stateful Switch 1",
+          "reverse": true
+        }   
+    ]
+
+```
