@@ -1,5 +1,5 @@
 {
-  "name": "homebridge-dummy",
+  "name": "homebridge-dummy-contact",
   "version": "0.3.0",
   "description": "Dummy switches for Homebridge: https://github.com/nfarina/homebridge",
   "license": "ISC",
@@ -8,10 +8,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/nfarina/homebridge-dummy.git"
+    "url": "git://github.com/NorthernMan54/homebridge-dummy-contact.git"
   },
   "bugs": {
-    "url": "http://github.com/nfarina/homebridge-dummy/issues"
+    "url": "http://github.com/NorthernMan54/homebridge-dummy-contact/issues"
   },
   "engines": {
     "node": ">=0.12.0",
