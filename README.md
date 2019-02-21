@@ -48,3 +48,7 @@ You may also want to create a dummy switch that turns itself on one second after
     ]
 
 ```
+
+## My modified version of this creates a Contact Sensor to complement the switch.
+
+This is to allow my plugin homebridge-alexa the ability to trigger routines from the contact sensor.
