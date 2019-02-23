@@ -9,12 +9,14 @@ module.exports = function(homebridge) {
   homebridge.registerAccessory("homebridge-dummy", "DummySwitch", DummySwitch);
 };
 
+
 function DummySwitch(log, config) {
   this.log = log;
   this.name = config.name;
   this.stateful = config.stateful;
   this.reverse = config.reverse;
   this._service = new Service.Switch(this.name);
+
   this._contact = new Service.ContactSensor(this.name);
 
   this.cacheDirectory = HomebridgeAPI.user.persistPath();
