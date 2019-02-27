@@ -1,5 +1,5 @@
 
-# "Dummy Switches" Plugin
+# "Dummy Switches and Contact" Plugin
 
 Example config.json:
 
@@ -7,7 +7,8 @@ Example config.json:
     "accessories": [
         {
           "accessory": "DummySwitch",
-          "name": "My Switch 1"
+          "name": "My Switch 1",
+          "contact": true
         }   
     ]
 
