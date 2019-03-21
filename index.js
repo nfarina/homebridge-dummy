@@ -16,7 +16,9 @@ function DummySwitch(log, config) {
   this.stateful = config.stateful;
   this.reverse = config.reverse;
   this.contact = config['contact'] || false;
-  this._service = new Service.Switch(this.name);
+  this._service = new Service.Lightbulb(this.name);
+  this._service
+    .addCharacteristic(Characteristic.Brightness);
 
   this._contact = new Service.ContactSensor(this.name);
 
