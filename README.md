@@ -48,3 +48,18 @@ You may also want to create a dummy switch that turns itself on one second after
     ]
 
 ```
+
+## Timed Switches
+
+You may also want to create a timed switch that turns itself off after being on for a given time (for example, five seconds). This can be done by passing the 'time' argument in your config.json:
+
+```
+    "accessories": [
+        {
+          "accessory": "DummySwitch",
+          "name": "My Stateful Switch 1",
+          "time": 5000
+        }   
+    ]
+
+```
