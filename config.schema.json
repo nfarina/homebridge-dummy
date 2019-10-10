@@ -1,0 +1,33 @@
+{
+    "pluginAlias": "DummySwitch",
+    "pluginType": "accessory",
+    "singular": false,
+    "schema": {
+        "type": "object",
+        "properties": {
+            "name": {
+                "title": "Name",
+                "type": "string",
+                "required": true
+            },
+            "stateful": {
+                "title": "Stateful",
+                "type": "boolean",
+                "default": false,
+                "description": "The switch remains on instead of being automatically turned off."
+            },
+            "reverse": {
+                "title": "Reverse",
+                "type": "boolean",
+                "default": false,
+                "description": "The switch's default state is on."
+            },
+            "time": {
+                "title": "Time",
+                "type": "number",
+                "default": 1000,
+                "description": "The switch will turn off after this number of milliseconds. Not used if the switch is stateful."
+            }
+        }
+    }
+}
