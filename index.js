@@ -23,8 +23,8 @@ function DummyContact(log, config) {
   this.storage = require('node-persist');
   this.storage.initSync({dir: this.cacheDirectory, forgiveParseErrors: true});
   
-  this._service.getCharacteristic(Characteristic.ContactSensorState)
-    .open('set', this._setOpen.bind(this));
+  this._service.getCharacteristic(Characteristic.ContactSensorState, 1)
+    .on('set', this._setOn.bind(this));
 
   if (this.reverse) this._service.setCharacteristic(Characteristic.ContactSensorState, (open ? 1 : 0));
 
@@ -42,7 +42,7 @@ DummyContact.prototype.getServices = function() {
   return [this._service];
 }
 
-DummyContact.prototype._setOpen = function(open, callback, context) {
+DummyContact.prototype._setOn = function(on, callback, context) {
 
   this.log("Setting contact to " + open);
 
@@ -61,11 +61,11 @@ DummyContact.prototype._setOpen = function(open, callback, context) {
 	
   if (open && !this.reverse && !this.stateful) {
     setTimeout(function() {
-      this._contact.setCHaracteristic(Characteristic.ContactSensorState, 0);
+      this._contact.setCHaracteristic(Characteristic.ContactSensorState, 1);
     }.bind(this), this.time);
   } else if (!on && this.reverse && !this.stateful) {
     setTimeout(function() {
-      this._contact.setCharacteristic(Characteristic.ContactSensorState, 1);
+      this._contact.setCharacteristic(Characteristic.ContactSensorState, 0);
     }.bind(this), this.time);
   }
   
