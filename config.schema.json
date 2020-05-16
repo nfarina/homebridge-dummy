@@ -1,5 +1,5 @@
 {
-    "pluginAlias": "DummySwitch",
+    "pluginAlias": "DummyContact",
     "pluginType": "accessory",
     "singular": false,
     "schema": {
