@@ -1,17 +1,17 @@
 {
-  "name": "homebridge-dummy",
-  "version": "0.4.1",
-  "description": "Dummy switches for Homebridge: https://github.com/nfarina/homebridge",
+  "name": "homebridge-dummy-contact-sensor",
+  "version": "0.0.1",
+  "description": "Dummy contact sensors for Homebridge (from nfarina's homebridge-dummy): https://github.com/nfarina/homebridge",
   "license": "ISC",
   "keywords": [
     "homebridge-plugin"
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/nfarina/homebridge-dummy.git"
+    "url": "git://github.com/deftlymaneuver/homebridge-dummy-contact-sensor.git"
   },
   "bugs": {
-    "url": "http://github.com/nfarina/homebridge-dummy/issues"
+    "url": "http://github.com/deftlymaneuver/homebridge-dummy-contact-sensor/issues"
   },
   "engines": {
     "node": ">=0.12.0",
