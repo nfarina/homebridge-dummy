@@ -1,6 +1,6 @@
 {
   "name": "homebridge-dummy-contact-sensor",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Dummy contact sensors for Homebridge (from nfarina's homebridge-dummy): https://github.com/nfarina/homebridge",
   "license": "ISC",
   "keywords": [
