@@ -23,17 +23,17 @@ function DummyContact(log, config) {
   this.storage = require('node-persist');
   this.storage.initSync({dir: this.cacheDirectory, forgiveParseErrors: true});
   
-  this._service.getCharacteristic(Characteristic.On)
-    .on('set', this._setOn.bind(this));
+  this._service.getCharacteristic(Characteristic.ContactSensorState)
+    .open('set', this._setOpen.bind(this));
 
-  if (this.reverse) this._service.setCharacteristic(Characteristic.On, true);
+  if (this.reverse) this._service.setCharacteristic(Characteristic.ContactSensorState, (open ? 1 : 0));
 
   if (this.stateful) {
 	var cachedState = this.storage.getItemSync(this.name);
 	if((cachedState === undefined) || (cachedState === false)) {
-		this._service.setCharacteristic(Characteristic.On, false);
+		this._service.setCharacteristic(Characteristic.ContactSensorState, 0);
 	} else {
-		this._service.setCharacteristic(Characteristic.On, true);
+		this._service.setCharacteristic(Characteristic.ContactSensorState, 1);
 	}
   }
 }
@@ -42,38 +42,36 @@ DummyContact.prototype.getServices = function() {
   return [this._service];
 }
 
-DummyContact.prototype._setOn = function(on, callback, context) {
+DummyContact.prototype._setOpen = function(open, callback, context) {
 
-  this.log("Setting contact to " + on);
+  this.log("Setting contact to " + open);
 
   if (this.contact) {
-    this._contact.setCharacteristic(Characteristic.ContactSensorState, (on ? 1 : 0));
+    this._contact.setCharacteristic(Characteristic.ContactSensorState, (open ? 1 : 0));
   }
 
-  if (this.state === on) {
-    this._service.getCharacteristic(Characteristic.On)
+  if (this.state === open) {
+    this._service.getCharacteristic(Characteristic.ContactSensorState, 1)
       .emit('change', {
-        oldValue: on,
-	newValue: on, 
+        oldValue: open,
+	newValue: open, 
 	context: context
       });
   }
 	
-  if (on && !this.reverse && !this.stateful) {
+  if (open && !this.reverse && !this.stateful) {
     setTimeout(function() {
-      this._service.setCharacteristic(Characteristic.On, false);
       this._contact.setCHaracteristic(Characteristic.ContactSensorState, 0);
     }.bind(this), this.time);
   } else if (!on && this.reverse && !this.stateful) {
     setTimeout(function() {
-      this._service.setCharacteristic(Characteristic.On, true);
       this._contact.setCharacteristic(Characteristic.ContactSensorState, 1);
     }.bind(this), this.time);
   }
   
   if (this.stateful) {
-	this.storage.setItemSync(this.name, on);
+	this.storage.setItemSync(this.name, open);
   }
-  this.state = on;
+  this.state = open;
   callback();
 }
