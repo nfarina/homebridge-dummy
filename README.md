@@ -50,6 +50,21 @@ You may also want to create a dummy switch that turns itself on one second after
 
 ```
 
+## Light Bulb or Switch
+
+By default, a switch will appear as a light bulb in Homebridge and the Home app. You can configure your Light Bulb to appear as a Switch instead. This is more convenient when not controlling a light bulb. This can be done by passing the 'switch' argument in your config.json:
+
+```
+    "accessories": [
+        {
+          "accessory": "DummySwitch",
+          "name": "My Stateful Switch 1",
+          "switch": true
+        }   
+    ]
+
+```
+
 ## My modified version of this creates a Contact Sensor to complement the switch.
 
 This is to allow my plugin homebridge-alexa the ability to trigger routines from the contact sensor.
