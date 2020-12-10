@@ -7,8 +7,7 @@ Example config.json:
     "accessories": [
         {
           "accessory": "DummySwitch",
-          "name": "My Switch 1",
-          "contact": true
+          "name": "My Switch 1"
         }   
     ]
 
@@ -50,21 +49,34 @@ You may also want to create a dummy switch that turns itself on one second after
 
 ```
 
-## Light Bulb or Switch
+## Timed Switches
 
-By default, a switch will appear as a light bulb in Homebridge and the Home app. You can configure your Light Bulb to appear as a Switch instead. This is more convenient when not controlling a light bulb. This can be done by passing the 'switch' argument in your config.json:
+You may also want to create a timed switch that turns itself off after being on for a given time (for example, five seconds). This can be done by passing the 'time' argument in your config.json:
 
 ```
     "accessories": [
         {
           "accessory": "DummySwitch",
           "name": "My Stateful Switch 1",
-          "switch": true
+          "time": 5000
         }   
     ]
 
 ```
 
-## My modified version of this creates a Contact Sensor to complement the switch.
 
-This is to allow my plugin homebridge-alexa the ability to trigger routines from the contact sensor.
+## My modified version of this Homebridge plugin creates an optional Contact Sensor to complement the switch.
+
+This is to allow my plugin homebridge-alexa the ability to trigger routines from the contact sensor.  Also, by default each DummySwitch is a Lightbulb.  This can be changed by passing the 'switch' argument in your config.json:
+```
+    "accessories": [
+        {
+          "accessory": "DummySwitch",
+          "name": "My Switch with Contact",
+          "switch": true,
+          "contact": true
+        }   
+    ]
+
+```
+
