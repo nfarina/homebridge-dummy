@@ -16,6 +16,7 @@ function DummySwitch(log, config) {
   this.stateful = config.stateful;
   this.reverse = config.reverse;
   this.contact = config['contact'] || false;
+  this.time = config.time ? config.time : 1000;
   this.switch = config['switch'] || false;
 
   if (this.switch) {
@@ -61,8 +62,7 @@ DummySwitch.prototype.getServices = function() {
 };
 
 DummySwitch.prototype._setOn = function(on, callback, context) {
-  this.log("Setting switch to " + on);
-
+  
   if (this.contact) {
     this._contact.setCharacteristic(Characteristic.ContactSensorState, (on ? 1 : 0));
   }
@@ -74,18 +74,21 @@ DummySwitch.prototype._setOn = function(on, callback, context) {
         newValue: on,
         context: context
       });
-  }
+  } else {
+	
+	  this.log("Setting switch to " + on);
 
-  if (on && !this.reverse && !this.stateful) {
-    setTimeout(function() {
-      this._service.setCharacteristic(Characteristic.On, false);
-      this._contact.setCharacteristic(Characteristic.ContactSensorState, 0);
-    }.bind(this), 1000);
-  } else if (!on && this.reverse && !this.stateful) {
-    setTimeout(function() {
-      this._service.setCharacteristic(Characteristic.On, true);
-      this._contact.setCharacteristic(Characteristic.ContactSensorState, 1);
-    }.bind(this), 1000);
+  	if (on && !this.reverse && !this.stateful) {
+			setTimeout(function() {
+				this._service.setCharacteristic(Characteristic.On, false);
+				this._contact.setCharacteristic(Characteristic.ContactSensorState, 0);
+			}.bind(this), this.time);
+		} else if (!on && this.reverse && !this.stateful) {
+			setTimeout(function() {
+				this._service.setCharacteristic(Characteristic.On, true);
+				this._contact.setCharacteristic(Characteristic.ContactSensorState, 1);
+			}.bind(this), this.time);
+		}
   }
 
   if (this.stateful) {
