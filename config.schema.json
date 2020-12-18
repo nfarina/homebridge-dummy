@@ -39,6 +39,12 @@
                 "type": "number",
                 "default": 1000,
                 "description": "The switch will turn off after this number of milliseconds. Not used if the switch is stateful."
+            },
+            "debug": {
+                "title": "Debug",
+                "type": "boolean",
+                "default": false,
+                "description": "Enables additional logging."
             }
         }
     }

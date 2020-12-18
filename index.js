@@ -18,6 +18,8 @@ function DummySwitch(log, config) {
   this.contact = config['contact'] || false;
   this.time = config.time ? config.time : 1000;
   this.switch = config['switch'] || false;
+  this.timerObject = null;
+  this.debug = config['debug'] || false;
 
   if (this.switch) {
     this._service = new Service.Switch(this.name);
@@ -62,12 +64,14 @@ DummySwitch.prototype.getServices = function() {
 };
 
 DummySwitch.prototype._setOn = function(on, callback, context) {
-  
+  if (this.debug) {
+  	this.log("Called to set switch to", on);
+  }
   if (this.contact) {
     this._contact.setCharacteristic(Characteristic.ContactSensorState, (on ? 1 : 0));
   }
 
-  if (this.state === on) {
+  if (this.state === on) {	
     this._service.getCharacteristic(Characteristic.On)
       .emit('change', {
         oldValue: on,
@@ -76,20 +80,40 @@ DummySwitch.prototype._setOn = function(on, callback, context) {
       });
   } else {
 	
-	  this.log("Setting switch to " + on);
+	  this.log("Setting switch to", on);
+	}
 
-  	if (on && !this.reverse && !this.stateful) {
-			setTimeout(function() {
-				this._service.setCharacteristic(Characteristic.On, false);
-				this._contact.setCharacteristic(Characteristic.ContactSensorState, 0);
-			}.bind(this), this.time);
-		} else if (!on && this.reverse && !this.stateful) {
-			setTimeout(function() {
-				this._service.setCharacteristic(Characteristic.On, true);
-				this._contact.setCharacteristic(Characteristic.ContactSensorState, 1);
-			}.bind(this), this.time);
+	if (on && !this.reverse && !this.stateful) {
+		if (this.timerObject) {
+			if (this.debug) {
+				this.log("Called to set state to On again.  Resetting timerObject.");
+			}
+			clearTimeout(this.timerObject);
+		} else {
+			if (this.debug) {
+				this.log("Called to set state to On again.  There is no timerObject.");
+			}			
 		}
-  }
+		this.timerObject = setTimeout(function() {
+			this._service.setCharacteristic(Characteristic.On, false);
+			this._contact.setCharacteristic(Characteristic.ContactSensorState, 0);
+		}.bind(this), this.time);
+	} else if (!on && this.reverse && !this.stateful) {
+		if (this.timerObject) {
+			if (this.debug) {
+				this.log("Called to set state to Off again.  Resetting timerObject.");
+			}
+			clearTimeout(this.timerObject);
+		} else {
+			if (this.debug) {
+				this.log("Called to set state to Off again.  There is no timerObject.");
+			}			
+		}
+		this.timerObject = setTimeout(function() {
+			this._service.setCharacteristic(Characteristic.On, true);
+			this._contact.setCharacteristic(Characteristic.ContactSensorState, 1);
+		}.bind(this), this.time);
+	}
 
   if (this.stateful) {
     this.storage.setItemSync(this.name, on);
