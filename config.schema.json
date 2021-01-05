@@ -29,10 +29,10 @@
                 "description": "The switch will turn off after this number of milliseconds. Not used if the switch is stateful."
             },
             "resettable": {
-                "title": "resettable",
+                "title": "Resettable",
                 "type": "boolean",
                 "default": false,
-                "description": "Resets the timer if the switch is set to on before the timer has finished"
+                "description": "The timer will reset each time the switch is turned on. "
             }
         }
     }
