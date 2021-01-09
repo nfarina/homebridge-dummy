@@ -63,3 +63,20 @@ You may also want to create a timed switch that turns itself off after being on 
     ]
 
 ```
+
+## Resettable Timed Switches
+
+You may also want to create a timed switch that is reset each time it is activated. This way, the original timer is reset instead of creating a new timer. 
+This can be done by passing the 'resettable' argument in your config.json:
+
+```
+    "accessories": [
+        {
+          "accessory": "DummySwitch",
+          "name": "My Stateful Switch 1",
+          "time": 5000,
+          "resettable": true
+        }   
+    ]
+
+```
