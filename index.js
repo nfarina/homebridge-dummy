@@ -16,6 +16,8 @@ function DummySwitch(log, config) {
   this.stateful = config.stateful;
   this.reverse = config.reverse;
   this.time = config.time ? config.time : 1000;		
+  this.resettable = config.resettable;
+  this.timer = null;
   this._service = new Service.Switch(this.name);
   
   this.cacheDirectory = HomebridgeAPI.user.persistPath();
@@ -46,11 +48,17 @@ DummySwitch.prototype._setOn = function(on, callback) {
   this.log("Setting switch to " + on);
 
   if (on && !this.reverse && !this.stateful) {
-    setTimeout(function() {
+    if (this.resettable) {
+      clearTimeout(this.timer);
+    }
+    this.timer = setTimeout(function() {
       this._service.setCharacteristic(Characteristic.On, false);
     }.bind(this), this.time);
   } else if (!on && this.reverse && !this.stateful) {
-    setTimeout(function() {
+    if (this.resettable) {
+      clearTimeout(this.timer);
+    }
+    this.timer = setTimeout(function() {
       this._service.setCharacteristic(Characteristic.On, true);
     }.bind(this), this.time);
   }
