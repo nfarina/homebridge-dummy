@@ -1,5 +1,3 @@
-// Approach from https://github.com/piotr-siudak/homebridge-dummy-with-accessoryinformation
-
 "use strict";
 
 var Service, Characteristic, HomebridgeAPI;
