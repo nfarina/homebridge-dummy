@@ -1,6 +1,9 @@
+// Approach from https://github.com/piotr-siudak/homebridge-dummy-with-accessoryinformation
+
 "use strict";
 
 var Service, Characteristic, HomebridgeAPI;
+const { HomebridgeDummyVersion } = require('./package.json');
 
 module.exports = function(homebridge) {
 
@@ -9,6 +12,7 @@ module.exports = function(homebridge) {
   HomebridgeAPI = homebridge;
   homebridge.registerAccessory("homebridge-dummy", "DummySwitch", DummySwitch);
 }
+
 
 function DummySwitch(log, config) {
   this.log = log;
@@ -19,6 +23,13 @@ function DummySwitch(log, config) {
   this.resettable = config.resettable;
   this.timer = null;
   this._service = new Service.Switch(this.name);
+  
+  this.informationService = new Service.AccessoryInformation();
+  this.informationService
+      .setCharacteristic(Characteristic.Manufacturer, 'Homebridge')
+      .setCharacteristic(Characteristic.Model, 'Dummy Switch')
+      .setCharacteristic(Characteristic.FirmwareRevision, HomebridgeDummyVersion)
+      .setCharacteristic(Characteristic.SerialNumber, 'DUMMY-' + this.name.replace(/\s/g, '').toUpperCase());
   
   this.cacheDirectory = HomebridgeAPI.user.persistPath();
   this.storage = require('node-persist');
@@ -40,7 +51,7 @@ function DummySwitch(log, config) {
 }
 
 DummySwitch.prototype.getServices = function() {
-  return [this._service];
+  return [this.informationService, this._service];
 }
 
 DummySwitch.prototype._setOn = function(on, callback) {
