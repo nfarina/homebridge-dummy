@@ -27,7 +27,7 @@ function DummySwitch(log, config) {
       .setCharacteristic(Characteristic.Manufacturer, 'Homebridge')
       .setCharacteristic(Characteristic.Model, 'Dummy Switch')
       .setCharacteristic(Characteristic.FirmwareRevision, HomebridgeDummyVersion)
-      .setCharacteristic(Characteristic.SerialNumber, 'DUMMY-' + this.name.replace(/\s/g, '').toUpperCase());
+      .setCharacteristic(Characteristic.SerialNumber, 'Dummy-' + this.name.replace(/\s/g, '-'));
   
   this.cacheDirectory = HomebridgeAPI.user.persistPath();
   this.storage = require('node-persist');
