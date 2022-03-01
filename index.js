@@ -20,6 +20,7 @@ function DummySwitch(log, config) {
   this.time = config.time ? config.time : 1000;		
   this.resettable = config.resettable;
   this.timer = null;
+  this.random = config.random;
   this._service = new Service.Switch(this.name);
   
   this.informationService = new Service.AccessoryInformation();
@@ -52,9 +53,20 @@ DummySwitch.prototype.getServices = function() {
   return [this.informationService, this._service];
 }
 
+function randomize(time) {
+  return Math.floor(Math.random() * (time + 1));
+}
+
 DummySwitch.prototype._setOn = function(on, callback) {
 
-  this.log("Setting switch to " + on);
+  var delay = this.random ? randomize(this.time) : this.time;
+  var msg = "Setting switch to " + on
+  if (this.random && !this.stateful) {
+      if (on && !this.reverse || !on && this.reverse) {
+        msg = msg + " (random delay " + delay + "ms)"
+      }
+  }
+  this.log(msg);
 
   if (on && !this.reverse && !this.stateful) {
     if (this.resettable) {
@@ -62,14 +74,14 @@ DummySwitch.prototype._setOn = function(on, callback) {
     }
     this.timer = setTimeout(function() {
       this._service.setCharacteristic(Characteristic.On, false);
-    }.bind(this), this.time);
+    }.bind(this), delay);
   } else if (!on && this.reverse && !this.stateful) {
     if (this.resettable) {
       clearTimeout(this.timer);
     }
     this.timer = setTimeout(function() {
       this._service.setCharacteristic(Characteristic.On, true);
-    }.bind(this), this.time);
+    }.bind(this), delay);
   }
   
   if (this.stateful) {
