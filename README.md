@@ -80,3 +80,23 @@ This can be done by passing the 'resettable' argument in your config.json:
     ]
 
 ```
+
+## Random Timed Switches
+
+You might want to create a switch that given a random time turns itself off.
+This can be achieved by enabling 'random'.
+Each time a non-stateful, random timed switch is triggered, the time is set to a random value between 0 and 'time' milliseconds.
+A random period within one hour is defined as follows in your config.json:
+
+```
+    "accessories": [
+        {
+          "accessory": "DummySwitch",
+          "name": "My Stateful Random Switch 1",
+          "time": 3600000,
+          "random": true
+        }
+    ]
+
+```
+
