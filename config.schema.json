@@ -32,7 +32,7 @@
                 "title": "Random",
                 "type": "boolean",
                 "default": false,
-                "description": "Randomize the time until a stateful switch turns off. Not used if the switch is stateful."
+                "description": "Randomize the time until a switch turns off. Not used if the switch is stateful."
             },
             "resettable": {
                 "title": "Resettable",
