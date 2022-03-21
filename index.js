@@ -74,7 +74,7 @@ DummyAccessory.prototype._setOn = function(on, callback) {
 			}, 100);
 		} 
 		else {
-			this.log('Switch accessory '+this.name+' to ${this.getStringFromState(On)}');	
+			this.log('Switch accessory ' + this.name + ' to '+ ${this.getStringFromState(On)});	
 			this._service.setCharacteristic(Characteristic.On, false)  
 
 			this.reverse = On;
