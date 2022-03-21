@@ -21,6 +21,9 @@
                   {
                    "title": "Switch",
                     "enum": ["Switch"]
+                  },                  {
+                   "title": "Toggle Switch",
+                    "enum": ["Toggle Switch"]
                   },
                  {
                    "title": "Light",
