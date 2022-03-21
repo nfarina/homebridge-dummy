@@ -48,7 +48,10 @@ function DummyAccessory(log, config) {
   this._service.getCharacteristic(Characteristic.On)
     .on('set', this._setOn.bind(this));
 
-  if (this.reverse) this._service.setCharacteristic(Characteristic.On, true);
+  if (this.reverse) {
+	this._service.setCharacteristic(Characteristic.On, true);
+	this._state = true;  
+  	}
 
   if (this.stateful) {
 	var cachedState = this.storage.getItemSync(this.name);
