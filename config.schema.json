@@ -21,9 +21,6 @@
                   {
                    "title": "Switch",
                     "enum": ["Switch"]
-                  },                  {
-                   "title": "Toggle Switch",
-                    "enum": ["Toggle Switch"]
                   },
                  {
                    "title": "Light",
@@ -36,6 +33,12 @@
                 "type": "boolean",
                 "default": true,
                 "description": "The accessory remains on instead of being automatically turned off."
+            },
+            "toggle": {
+                "title": "Toggle",
+                "type": "boolean",
+                "default": true,
+                "description": "The accessory toggles off when on and receives on command."
             },
             "reverse": {
                 "title": "Reverse",
