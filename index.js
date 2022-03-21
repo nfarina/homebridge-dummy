@@ -26,9 +26,10 @@ function DummyAccessory(log, config) {
   this.timer = null;
 	
 switch (this.accessorytype) {
-	case 'Switch': this._service = new Service.Switch(this.name);
-		case 'Outlet': this._service = new Service.Outlet(this.name);
-		case 'Light': this._service = new Service.Lightbulb(this.name);
+	case 'Switch': this._service = new Service.Switch(this.name);break;
+		case 'Outlet': this._service = new Service.Outlet(this.name);break;
+		case 'Light': this._service = new Service.Lightbulb(this.name);break;
+		
 
 		
 }
