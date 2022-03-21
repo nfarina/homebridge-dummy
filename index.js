@@ -12,7 +12,7 @@ module.exports = function(homebridge) {
 }
 
 
-function DummySwitch(log, config) {
+function DummyOutlet(log, config) {
   this.log = log;
   this.name = config.name;
   this.stateful = config.stateful;
