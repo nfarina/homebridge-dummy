@@ -1,2 +1,2 @@
 
-# "Dummy Outlets" Plugin
+# "Dummy Accessory" Plugin
