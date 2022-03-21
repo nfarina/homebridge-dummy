@@ -74,7 +74,7 @@ DummyAccessory.prototype._setOn = function(on, callback) {
 			}, 100);
 		} 
 		else {
-    this.log(`Setting switch to ${this.getStringFromState(turnOn)}.`)
+    this.log(`Setting switch to ${this.getStringFromState(turnOn)}.`);
 			this.reverse = On;
 		}
 	} 
