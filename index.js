@@ -66,14 +66,14 @@ DummyAccessory.prototype.getServices = function() {
 DummyAccessory.prototype._setOn = function(on, callback) {
 
 	if (this.toggle){
-		if (on && this._state){
+		if (On && this._state){
 			setTimeout(() => {
 				this._service.setCharacteristic(Characteristic.On, false)  
 			}, 100);
 		} 
 		else {
 			this._state = On;
-			this.storage.setItemSync(this.name, on);
+			this.storage.setItemSync(this.name, On);
 		}
 	} 
 	else {
