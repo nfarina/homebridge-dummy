@@ -37,7 +37,7 @@
             "toggle": {
                 "title": "Toggle",
                 "type": "boolean",
-                "default": true,
+                "default": false,
                 "description": "The accessory toggles off when on and receives on command."
             },
             "reverse": {
