@@ -91,7 +91,11 @@ DummyAccessory.prototype._setOn = function(on, callback) {
   if (this.toggle){
 
   		if (on && this._state){
-  			this._service.setCharacteristic(Characteristic.On, false);
+  			this.log('Switch is ON, setting to OFF.');
+
+   			 setTimeout(() => {
+			      this._service.setCharacteristic(Characteristic.On, false)  
+			    }, 100);
   		} 
   		else {
   			this._state = on;
