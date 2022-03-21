@@ -12,22 +12,31 @@ module.exports = function(homebridge) {
 }
 
 
-function DummyOutlet(log, config) {
+function DummyAcessory(log, config) {
   this.log = log;
   this.name = config.name;
+  this.type = config.type;
   this.stateful = config.stateful;
   this.reverse = config.reverse;
   this.time = config.time ? config.time : 1000;		
   this.resettable = config.resettable;
   this.timer = null;
-  this._service = new Service.Outlet(this.name);
+	
+switch (type) {
+	case 'Switch': this._service = new Service.Switch(this.name);
+		case 'Outlet': this._service = new Service.Outlet(this.name);
+		case 'Light': this._service = new Service.Light(this.name);
+	default:this._service = new Service.Switch(this.name)
+		
+}
+	
   
   this.informationService = new Service.AccessoryInformation();
   this.informationService
       .setCharacteristic(Characteristic.Manufacturer, 'Homebridge')
-      .setCharacteristic(Characteristic.Model, 'Dummy Outlet')
+      .setCharacteristic(Characteristic.Model, 'Dummy Accessory '+this.type)
       .setCharacteristic(Characteristic.FirmwareRevision, HomebridgeDummyVersion)
-      .setCharacteristic(Characteristic.SerialNumber, 'Dummy-' + this.name.replace(/\s/g, '-'));
+      .setCharacteristic(Characteristic.SerialNumber, 'Dummy Accessory-'+this.type +'-' + this.name.replace(/\s/g, '-'));
   
   this.cacheDirectory = HomebridgeAPI.user.persistPath();
   this.storage = require('node-persist');
@@ -48,11 +57,11 @@ function DummyOutlet(log, config) {
   }
 }
 
-DummyOutlet.prototype.getServices = function() {
+DummyAccessory.prototype.getServices = function() {
   return [this.informationService, this._service];
 }
 
-DummyOutlet.prototype._setOn = function(on, callback) {
+DummyAccessory.prototype._setOn = function(on, callback) {
 
   this.log("Setting switch to " + on);
 
