@@ -17,7 +17,7 @@ function DummyAccessory(log, config) {
   this.name = config.name;
   this.accessorytype = config.accessorytype;
 	
-	this.log(this.accessorytype + '-'this.name);
+	this.log(this.accessorytype + '-'+this.name);
 	
   this.stateful = config.stateful;
   this.reverse = config.reverse;
