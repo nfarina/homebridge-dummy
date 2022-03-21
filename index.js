@@ -50,7 +50,7 @@ function DummyAccessory(log, config) {
 
   if (this.reverse) {
 	this._service.setCharacteristic(Characteristic.On, true);
-	this._state = true;  
+	this._state = this._service;  
   	}
 
   if (this.stateful) {
@@ -89,15 +89,14 @@ DummyAccessory.prototype._setOn = function(on, callback) {
   }
   if (this.toggle){
   		if (on && this._state){
-  			setTimeout(() => {
-  				this._service.setCharacteristic(Characteristic.On, false)  
-  			}, 100);
+  			this._service.setCharacteristic(Characteristic.On, false);
   		} 
   		else {
   			this._state = on;
   			this.storage.setItemSync(this.name, on);
   		}
 	} 
+    	
   
   if (this.stateful) {
 	this.storage.setItemSync(this.name, on);
