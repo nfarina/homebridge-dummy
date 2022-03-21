@@ -9,25 +9,25 @@
                 "title": "Name",
                 "type": "string",
                 "required": true
-            }, 
-             "accessorytype": {
+                }, 
+            "accessorytype": {
                 "title": "Accessory Type",
                 "type": "string",
                 "oneOf": [
-                 {
-                 "title": "Outlet",
+                    {
+                    "title": "Light",
+                    "enum": ["Light"]
+                    },
+                    {
+                    "title": "Outlet",
                     "enum": ["Outlet"]
-               },
-                  {
-                   "title": "Switch",
+                    },
+                    {
+                    "title": "Switch",
                     "enum": ["Switch"]
-                  },
-                 {
-                   "title": "Light",
-                 "enum": ["Light"]
-                 }
-               ]
-           },
+                    }
+                ]
+            },
             "stateful": {
                 "title": "Stateful",
                 "type": "boolean",
@@ -52,12 +52,12 @@
                 "default": 1000,
                 "description": "The accessory will turn off after this number of milliseconds. Not used if the accessory is stateful."
             },
-            "resettable": {
+                "resettable": {
                 "title": "Resettable",
                 "type": "boolean",
                 "default": false,
                 "description": "The timer will reset each time the accessory is turned on. "
+                }
             }
         }
     }
-}
