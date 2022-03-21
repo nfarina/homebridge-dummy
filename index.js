@@ -13,23 +13,24 @@ module.exports = function(homebridge) {
 
 
 function DummyAccessory(log, config) {
-  this.log = log;
-  this.name = config.name;
-  this.accessorytype = config.accessorytype;	
-  this.stateful = config.stateful;
-  this.toggle = config.toggle;
+	this.log = log;
+	this.name = config.name;
+	this.accessorytype = config.accessorytype;	
+	this.stateful = config.stateful;
+	this.toggle = config.toggle;
 	this.log(this.name+' Toggle Status '+this.toggle);
-  this.reverse = config.reverse;
-  this.time = config.time ? config.time : 1000;		
-  this.resettable = config.resettable;
-  this.timer = null;
+	this.reverse = config.reverse;
+	this.time = config.time ? config.time : 1000;		
+	this.resettable = config.resettable;
+	this.timer = null;
+	this._state = false;
 	
-switch (this.accessorytype) {
-	case 'Switch': this._service = new Service.Switch(this.name);break;
-	case 'Outlet': this._service = new Service.Outlet(this.name);break;
-	case 'Light': this._service = new Service.Lightbulb(this.name);break;
-	default : this._service = new Service.Switch(this.name);break;
-	}
+	switch (this.accessorytype) {
+		case 'Switch': this._service = new Service.Switch(this.name);break;
+		case 'Outlet': this._service = new Service.Outlet(this.name);break;
+		case 'Light': this._service = new Service.Lightbulb(this.name);break;
+		default : this._service = new Service.Switch(this.name);break;
+		}
 
   
   this.informationService = new Service.AccessoryInformation();
@@ -65,15 +66,14 @@ DummyAccessory.prototype.getServices = function() {
 DummyAccessory.prototype._setOn = function(on, callback) {
 
 	if (this.toggle){
-		if (on){
-			this.log("Accessory "+this.name+" is ON setting accessory to OFF");
+		if (on && this._state){
 			setTimeout(() => {
 				this._service.setCharacteristic(Characteristic.On, false)  
 			}, 100);
 		} 
 		else {
-    //this.log(`Setting switch to ${this.getStringFromState(On)}.`);
-			this.reverse = On;
+			this._state = On;
+			this.storage.setItemSync(this.name, on);
 		}
 	} 
 	else {
