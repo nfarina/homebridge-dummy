@@ -15,12 +15,12 @@
                 "type": "string",
                 "oneOf": [
                  {
-                 "title": "Switch",
-                    "enum": ["Switch"]
+                 "title": "Outlet",
+                    "enum": ["Outlet"]
                },
                   {
-                   "title": "Outlet",
-                    "enum": ["Outlet"]
+                   "title": "Switch",
+                    "enum": ["Switch"]
                   },
                  {
                    "title": "Light",
@@ -31,26 +31,26 @@
             "stateful": {
                 "title": "Stateful",
                 "type": "boolean",
-                "default": false,
-                "description": "The outlet remains on instead of being automatically turned off."
+                "default": true,
+                "description": "The accessory remains on instead of being automatically turned off."
             },
             "reverse": {
                 "title": "Reverse",
                 "type": "boolean",
                 "default": false,
-                "description": "The outlet's default state is on."
+                "description": "The accessory's default state is on."
             },
             "time": {
                 "title": "Time",
                 "type": "number",
                 "default": 1000,
-                "description": "The outlet will turn off after this number of milliseconds. Not used if the outlet is stateful."
+                "description": "The accessory will turn off after this number of milliseconds. Not used if the accessory is stateful."
             },
             "resettable": {
                 "title": "Resettable",
                 "type": "boolean",
                 "default": false,
-                "description": "The timer will reset each time the outlet is turned on. "
+                "description": "The timer will reset each time the accessory is turned on. "
             }
         }
     }
