@@ -89,11 +89,7 @@ DummyAccessory.prototype._setOn = function(on, callback) {
     }.bind(this), this.time);
   }
   if (this.toggle){
-	  if (this.firstrun && this.reverse) {
-		  this._service.setCharacteristic(Characteristic.On, true);
-		  this.firstrun = false;
-	  }
-	  else {
+
   		if (on && this._state){
   			this._service.setCharacteristic(Characteristic.On, false);
   		} 
@@ -101,7 +97,7 @@ DummyAccessory.prototype._setOn = function(on, callback) {
   			this._state = on;
   			this.storage.setItemSync(this.name, on);
   		}
-	} }
+	} 
     	
   
   if (this.stateful) {
