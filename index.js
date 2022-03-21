@@ -24,6 +24,8 @@ function DummyAccessory(log, config) {
 	this.resettable = config.resettable;
 	this.timer = null;
 	this._state = false;
+	this.firstrun = true;
+		
 	
 	switch (this.accessorytype) {
 		case 'Switch': this._service = new Service.Switch(this.name);break;
@@ -49,8 +51,7 @@ function DummyAccessory(log, config) {
     .on('set', this._setOn.bind(this));
 
   if (this.reverse) {
-	this._service.setCharacteristic(Characteristic.On, true);
-	this._state = this._service;  
+	this._service.setCharacteristic(Characteristic.On, true); 
   	}
 
   if (this.stateful) {
@@ -88,6 +89,11 @@ DummyAccessory.prototype._setOn = function(on, callback) {
     }.bind(this), this.time);
   }
   if (this.toggle){
+	  if (this.firstrun && this.reverse) {
+		  this._service.setCharacteristic(Characteristic.On, true);
+		  this.firstrun = false;
+	  }
+	  else {
   		if (on && this._state){
   			this._service.setCharacteristic(Characteristic.On, false);
   		} 
@@ -95,7 +101,7 @@ DummyAccessory.prototype._setOn = function(on, callback) {
   			this._state = on;
   			this.storage.setItemSync(this.name, on);
   		}
-	} 
+	} }
     	
   
   if (this.stateful) {
