@@ -12,7 +12,7 @@ module.exports = function(homebridge) {
 }
 
 
-function DummyAcessory(log, config) {
+function DummyAccessory(log, config) {
   this.log = log;
   this.name = config.name;
   this.type = config.type;
