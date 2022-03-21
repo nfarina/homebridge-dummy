@@ -1,5 +1,5 @@
 {
-    "pluginAlias": "DummyOutlet",
+    "pluginAlias": "DummyAccessory",
     "pluginType": "accessory",
     "singular": false,
     "schema": {
@@ -9,7 +9,25 @@
                 "title": "Name",
                 "type": "string",
                 "required": true
-            },
+            }, 
+             "type": {
+                "title": "Accessory Type",
+                "type": "string",
+                "oneOf": [
+                 {
+                 "title": "Switch",
+                    "enum": ["Switch"]
+               },
+                  {
+                   "title": "Outlet",
+                    "enum": ["Outlet"]
+                  },
+                 {
+                   "title": "Light",
+                 "enum": ["Light"]
+                 }
+               ]
+           },
             "stateful": {
                 "title": "Stateful",
                 "type": "boolean",
