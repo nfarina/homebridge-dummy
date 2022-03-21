@@ -15,11 +15,9 @@ module.exports = function(homebridge) {
 function DummyAccessory(log, config) {
   this.log = log;
   this.name = config.name;
-  this.accessorytype = config.accessorytype;
-	
-	this.log('DummyAccessory-'+this.accessorytype + '-'+this.name);
-	
+  this.accessorytype = config.accessorytype;	
   this.stateful = config.stateful;
+  this.toggle = config.toggle;
   this.reverse = config.reverse;
   this.time = config.time ? config.time : 1000;		
   this.resettable = config.resettable;
@@ -27,16 +25,11 @@ function DummyAccessory(log, config) {
 	
 switch (this.accessorytype) {
 	case 'Switch': this._service = new Service.Switch(this.name);break;
-	case 'Toggle Switch': this._service = new Service.Switch(this.name);break;
+	case 'Outlet': this._service = new Service.Outlet(this.name);break;
+	case 'Light': this._service = new Service.Lightbulb(this.name);break;
+	default : this._service = new Service.Switch(this.name);break;
+	}
 
-		case 'Outlet': this._service = new Service.Outlet(this.name);break;
-		case 'Light': this._service = new Service.Lightbulb(this.name);break;
-		default : this._service = new Service.Switch(this.name);break;
-		
-
-		
-}
-	
   
   this.informationService = new Service.AccessoryInformation();
   this.informationService
@@ -70,27 +63,13 @@ DummyAccessory.prototype.getServices = function() {
 
 DummyAccessory.prototype._setOn = function(on, callback) {
 
-	if(this.accessorytype == "Toggle Switch") {
-	
-		if (on && this._state) {
-    this.log('Switch is ON, setting to OFF.')
-
-    setTimeout(() => {
-      this._service.setCharacteristic(Characteristic.On, false)  
-    }, 100)
-  } else {
-    this.log(`Setting switch to ${this.getStringFromState(On)}.`)
-
-    this._state = On
-
-    this.storage.setItemSync(this.name, On)
-  }
-		
-		
-		
-	}
-	else {
   this.log("Setting switch to " + on);
+
+	if (on && this.toggle){
+		this._service.setCharacteristic(Characteristic.On, false);
+	}
+	
+	
 
   if (on && !this.reverse && !this.stateful) {
     if (this.resettable) {
@@ -111,14 +90,5 @@ DummyAccessory.prototype._setOn = function(on, callback) {
   if (this.stateful) {
 	this.storage.setItemSync(this.name, on);
   }
-	}
   callback();
 }
-
-
-DummyAccessory.prototype.getStringFromState = function (state) {
-  return state ? 'ON' : 'OFF'
-}
-
-
-
