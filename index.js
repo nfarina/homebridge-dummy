@@ -64,15 +64,21 @@ DummyAccessory.prototype.getServices = function() {
 
 DummyAccessory.prototype._setOn = function(on, callback) {
 
-  this.log("Setting switch "+this.name+" to " + on);
+	this.log("Setting switch "+this.name+" to " + on);
 
-	if (on && this.toggle){
-		this._service.setCharacteristic(Characteristic.On, false);
-		this.log("Setting switch "+this.name+" to " + "Off");
-	} else if (!on && this.toggle) {
-		this._service.setCharacteristic(Characteristic.On, true);
-	this.log("Setting switch "+this.name+" to " + "On");
-} else {
+	if (this.toggle){
+		if (on && this.toggle && this.reverse){
+			this.log("Accessory "+this.name+" is On. Setting accessory "+this.name+" to " + "Off");
+			setTimeout(() => {
+				this._service.setCharacteristic(Characteristic.On, false)  
+			}, 100);
+		} 
+		else {
+			this.log("Accessory "+this.name+" is " +Characteristic.On +". Setting accessory "+this.name+" to " + "TBA");
+			this.reverse = Characteristic.On;
+		}
+	} 
+	else {
 	
 	
 
