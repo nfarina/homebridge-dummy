@@ -67,26 +67,17 @@ DummyAccessory.prototype._setOn = function(on, callback) {
 	this.log("Setting switch "+this.name+" to " + on);
 
 	if (this.toggle){
-		if (on && this.toggle && this.reverse){
+		if (on){
 			this.log("Accessory "+this.name+" is ON setting accessory to OFF");
 			setTimeout(() => {
 				this._service.setCharacteristic(Characteristic.On, false)  
 			}, 100);
 		} 
 		else {
-			if (this.reverse) {
-				this.log("Accessory "+this.name+" is ON setting accessory to OFF");	
-				this._service.setCharacteristic(Characteristic.On, false)  
+			this.log('Switch accessory '+this.name+' to ${this.getStringFromState(On)}');	
+			this._service.setCharacteristic(Characteristic.On, false)  
 
-				this.reverse = false;
-			}
-			else {
-				this.log("Accessory "+this.name+" is OFF setting accessory to ON");	
-				this._service.setCharacteristic(Characteristic.On, true)  
-				this.reverse = true;
-			}
-			
-
+			this.reverse = On;
 		}
 	} 
 	else {
@@ -114,4 +105,8 @@ DummyAccessory.prototype._setOn = function(on, callback) {
   }
 }
   callback();
+}
+
+DummyAccessory.prototype.getStringFromState = function (state) {
+  return state ? 'ON' : 'OFF'
 }
