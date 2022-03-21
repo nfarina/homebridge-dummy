@@ -10,8 +10,8 @@
                 "type": "string",
                 "required": true
             }, 
-             "type": {
-                "title": "Type",
+             "accessorytype": {
+                "title": "Accessory Type",
                 "type": "string",
                 "oneOf": [
                  {
