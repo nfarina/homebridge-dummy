@@ -45,7 +45,7 @@
                 "description": "The accessory toggles off when on and receives on command."
             },
             "reverse": {
-                "title": "Reverse",
+                "title": "Default On",
                 "type": "boolean",
                 "default": false,
                 "description": "The accessory's default state is on."
