@@ -17,7 +17,7 @@ function DummyAccessory(log, config) {
   this.name = config.name;
   this.accessorytype = config.accessorytype;
 	
-	this.log(this.accessorytype + '-'+this.name);
+	this.log('DummyAccessory-'+this.accessorytype + '-'+this.name);
 	
   this.stateful = config.stateful;
   this.reverse = config.reverse;
@@ -27,6 +27,8 @@ function DummyAccessory(log, config) {
 	
 switch (this.accessorytype) {
 	case 'Switch': this._service = new Service.Switch(this.name);break;
+	case 'Toggle Switch': this._service = new Service.Switch(this.name);break;
+
 		case 'Outlet': this._service = new Service.Outlet(this.name);break;
 		case 'Light': this._service = new Service.Lightbulb(this.name);break;
 		default : this._service = new Service.Switch(this.name);break;
@@ -92,3 +94,30 @@ DummyAccessory.prototype._setOn = function(on, callback) {
   
   callback();
 }
+
+
+DummyAccessory.prototype.getStringFromState = function (state) {
+  return state ? 'ON' : 'OFF'
+}
+
+DummyAccessory.prototype.setState = function (turnOn, callback) {
+  if (this.assessorytype = 'Toggle Switch'){
+	if (turnOn && this._state) {
+    this.log('Switch is ON, setting to OFF.')
+
+    setTimeout(() => {
+      this._service.setCharacteristic(Characteristic.On, false)  
+    }, 100)
+  } else {
+    this.log(`Setting switch to ${this.getStringFromState(turnOn)}.`)
+
+    this._state = turnOn
+
+    this.storage.setItemSync(this.name, turnOn)
+  }
+  }
+  callback()
+}
+
+
+
