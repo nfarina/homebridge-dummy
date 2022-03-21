@@ -18,6 +18,7 @@ function DummyAccessory(log, config) {
   this.accessorytype = config.accessorytype;	
   this.stateful = config.stateful;
   this.toggle = config.toggle;
+	this.log(this.name+' Toggle Status '+this.toggle);
   this.reverse = config.reverse;
   this.time = config.time ? config.time : 1000;		
   this.resettable = config.resettable;
@@ -63,11 +64,15 @@ DummyAccessory.prototype.getServices = function() {
 
 DummyAccessory.prototype._setOn = function(on, callback) {
 
-  this.log("Setting switch to " + on);
+  this.log("Setting switch "+this.name+" to " + on);
 
 	if (on && this.toggle){
 		this._service.setCharacteristic(Characteristic.On, false);
-	}
+		this.log("Setting switch "+this.name+" to " + "Off");
+	} elseif (!on && this.google {
+		this._service.setCharacteristic(Characteristic.On, true);
+	this.log("Setting switch "+this.name+" to " + "On");
+} else {
 	
 	
 
@@ -90,5 +95,6 @@ DummyAccessory.prototype._setOn = function(on, callback) {
   if (this.stateful) {
 	this.storage.setItemSync(this.name, on);
   }
+}
   callback();
 }
