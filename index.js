@@ -39,7 +39,7 @@ switch (this.accessorytype) {
       .setCharacteristic(Characteristic.Manufacturer, 'Homebridge')
       .setCharacteristic(Characteristic.Model, 'Dummy Accessory '+this.type)
       .setCharacteristic(Characteristic.FirmwareRevision, HomebridgeDummyVersion)
-      .setCharacteristic(Characteristic.SerialNumber, 'Dummy Accessory-'+this.type +'-' + this.name.replace(/\s/g, '-'));
+      .setCharacteristic(Characteristic.SerialNumber, 'Dummy Accessory-'+this.accessorytype +'-' + this.name.replace(/\s/g, '-'));
   
   this.cacheDirectory = HomebridgeAPI.user.persistPath();
   this.storage = require('node-persist');
