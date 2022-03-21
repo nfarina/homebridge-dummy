@@ -65,19 +65,7 @@ DummyAccessory.prototype.getServices = function() {
 
 DummyAccessory.prototype._setOn = function(on, callback) {
 
-	if (this.toggle){
-		if (on && this._state){
-			setTimeout(() => {
-				this._service.setCharacteristic(Characteristic.On, false)  
-			}, 100);
-		} 
-		else {
-			this._state = on;
-			this.storage.setItemSync(this.name, on);
-		}
-	} 
-	else {
-	
+	this.log("Setting switch " + this.name + " to " + on);
 	
 
   if (on && !this.reverse && !this.stateful) {
@@ -95,11 +83,22 @@ DummyAccessory.prototype._setOn = function(on, callback) {
       this._service.setCharacteristic(Characteristic.On, true);
     }.bind(this), this.time);
   }
+  if (this.toggle){
+  		if (on && this._state){
+  			setTimeout(() => {
+  				this._service.setCharacteristic(Characteristic.On, false)  
+  			}, 100);
+  		} 
+  		else {
+  			this._state = on;
+  			this.storage.setItemSync(this.name, on);
+  		}
+	} 
   
   if (this.stateful) {
 	this.storage.setItemSync(this.name, on);
   }
-}
+
   callback();
 }
 
