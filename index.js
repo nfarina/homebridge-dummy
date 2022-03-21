@@ -69,7 +69,7 @@ DummyAccessory.prototype._setOn = function(on, callback) {
 	if (on && this.toggle){
 		this._service.setCharacteristic(Characteristic.On, false);
 		this.log("Setting switch "+this.name+" to " + "Off");
-	} elseif (!on && this.toogle {
+	} elseif (!on && this.toggle {
 		this._service.setCharacteristic(Characteristic.On, true);
 	this.log("Setting switch "+this.name+" to " + "On");
 } else {
