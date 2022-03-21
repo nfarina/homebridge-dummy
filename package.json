@@ -1,17 +1,17 @@
 {
-  "name": "homebridge-dummy",
+  "name": "homebridge-dummy-outlet",
   "version": "0.6.0",
-  "description": "Dummy switches for Homebridge: https://github.com/nfarina/homebridge",
+  "description": "Dummy outlets for Homebridge: https://github.com/nfarina/homebridge",
   "license": "ISC",
   "keywords": [
     "homebridge-plugin"
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/nfarina/homebridge-dummy.git"
+    "url": "git://github.com/ptysell/homebridge-dummy-outlet.git"
   },
   "bugs": {
-    "url": "http://github.com/nfarina/homebridge-dummy/issues"
+    "url": "http://github.com/ptysell/homebridge-dummy-outlet/issues"
   },
   "engines": {
     "node": ">=0.12.0",
