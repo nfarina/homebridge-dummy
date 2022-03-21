@@ -70,7 +70,7 @@ DummyAccessory.prototype.getServices = function() {
 
 DummyAccessory.prototype._setOn = function(on, callback) {
 
-	if(this.accessorytype == "Toggle Switch"} {
+	if(this.accessorytype == "Toggle Switch") {
 	
 		if (on && this._state) {
     this.log('Switch is ON, setting to OFF.')
@@ -118,13 +118,6 @@ DummyAccessory.prototype._setOn = function(on, callback) {
 
 DummyAccessory.prototype.getStringFromState = function (state) {
   return state ? 'ON' : 'OFF'
-}
-
-DummyAccessory.prototype.setState = function (turnOn, callback) {
-  if (this.assessorytype == 'Toggle Switch'){
-	
-  }
-  callback()
 }
 
 
