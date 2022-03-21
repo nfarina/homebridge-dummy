@@ -1,5 +1,5 @@
 {
-    "pluginAlias": "DummySwitch",
+    "pluginAlias": "DummyOutlet",
     "pluginType": "accessory",
     "singular": false,
     "schema": {
@@ -14,25 +14,25 @@
                 "title": "Stateful",
                 "type": "boolean",
                 "default": false,
-                "description": "The switch remains on instead of being automatically turned off."
+                "description": "The outlet remains on instead of being automatically turned off."
             },
             "reverse": {
                 "title": "Reverse",
                 "type": "boolean",
                 "default": false,
-                "description": "The switch's default state is on."
+                "description": "The outlet's default state is on."
             },
             "time": {
                 "title": "Time",
                 "type": "number",
                 "default": 1000,
-                "description": "The switch will turn off after this number of milliseconds. Not used if the switch is stateful."
+                "description": "The outlet will turn off after this number of milliseconds. Not used if the outlet is stateful."
             },
             "resettable": {
                 "title": "Resettable",
                 "type": "boolean",
                 "default": false,
-                "description": "The timer will reset each time the switch is turned on. "
+                "description": "The timer will reset each time the outlet is turned on. "
             }
         }
     }
