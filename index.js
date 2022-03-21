@@ -70,6 +70,26 @@ DummyAccessory.prototype.getServices = function() {
 
 DummyAccessory.prototype._setOn = function(on, callback) {
 
+	if(this.accessorytype == "Toggle Switch"} {
+	
+		if (on && this._state) {
+    this.log('Switch is ON, setting to OFF.')
+
+    setTimeout(() => {
+      this._service.setCharacteristic(Characteristic.On, false)  
+    }, 100)
+  } else {
+    this.log(`Setting switch to ${this.getStringFromState(On)}.`)
+
+    this._state = On
+
+    this.storage.setItemSync(this.name, On)
+  }
+		
+		
+		
+	}
+	else {
   this.log("Setting switch to " + on);
 
   if (on && !this.reverse && !this.stateful) {
@@ -91,7 +111,7 @@ DummyAccessory.prototype._setOn = function(on, callback) {
   if (this.stateful) {
 	this.storage.setItemSync(this.name, on);
   }
-  
+	}
   callback();
 }
 
@@ -101,20 +121,8 @@ DummyAccessory.prototype.getStringFromState = function (state) {
 }
 
 DummyAccessory.prototype.setState = function (turnOn, callback) {
-  if (this.assessorytype = 'Toggle Switch'){
-	if (turnOn && this._state) {
-    this.log('Switch is ON, setting to OFF.')
-
-    setTimeout(() => {
-      this._service.setCharacteristic(Characteristic.On, false)  
-    }, 100)
-  } else {
-    this.log(`Setting switch to ${this.getStringFromState(turnOn)}.`)
-
-    this._state = turnOn
-
-    this.storage.setItemSync(this.name, turnOn)
-  }
+  if (this.assessorytype == 'Toggle Switch'){
+	
   }
   callback()
 }
