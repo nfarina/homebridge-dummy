@@ -39,7 +39,14 @@
                 "type": "boolean",
                 "default": false,
                 "description": "The timer will reset each time the switch is turned on. "
+            },
+            "disableLogging": {
+                "title": "DisableLogging",
+                "type": "boolean",
+                "default": false,
+                "description": "No state change information (On/Off) will be logged. "
             }
+
         }
     }
 }
