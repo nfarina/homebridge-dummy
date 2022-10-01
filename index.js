@@ -21,6 +21,7 @@ function DummySwitch(log, config) {
   this.resettable = config.resettable;
   this.timer = null;
   this.random = config.random;
+  this.disableLogging = config.disableLogging;
   this._service = new Service.Switch(this.name);
   
   this.informationService = new Service.AccessoryInformation();
@@ -66,7 +67,9 @@ DummySwitch.prototype._setOn = function(on, callback) {
         msg = msg + " (random delay " + delay + "ms)"
       }
   }
-  this.log(msg);
+  if( ! this.disableLogging ) {
+      this.log(msg);
+  }
 
   if (on && !this.reverse && !this.stateful) {
     if (this.resettable) {
