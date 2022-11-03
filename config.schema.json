@@ -2,6 +2,7 @@
     "pluginAlias": "DummyAccessory",
     "pluginType": "accessory",
     "singular": false,
+    "orderable": true,
     "schema": {
         "type": "object",
         "properties": {
