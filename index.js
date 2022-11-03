@@ -8,7 +8,7 @@ module.exports = function(homebridge) {
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
   HomebridgeAPI = homebridge;
-  homebridge.registerAccessory("homebridge-dummy-accessory", "DummyAccessory", DummyAccessory);
+  homebridge.registerAccessory("homebridge-dummy-accessories", "DummyAccessories", DummyAccessories);
 }
 
 
@@ -31,7 +31,6 @@ function DummyAccessory(log, config) {
 		case 'Switch': this._service = new Service.Switch(this.name);break;
 		case 'Outlet': this._service = new Service.Outlet(this.name);break;
 		case 'Light': this._service = new Service.Lightbulb(this.name);break;
-		case 'Door': this._service = new Service.Door(this.name);break;
 		default : this._service = new Service.Switch(this.name);break;
 		}
 
