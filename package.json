@@ -1,5 +1,5 @@
 {
-  "name": "homebridge-dummy-accessory",
+  "name": "homebridge-dummy-accessories",
   "version": "0.6.1",
   "description": "Dummy accessory for Homebridge: https://github.com/nfarina/homebridge",
   "license": "ISC",
