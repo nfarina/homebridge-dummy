@@ -1,5 +1,5 @@
 {
-    "pluginAlias": "DummyAccessory",
+    "pluginAlias": "DummyAccessories",
     "pluginType": "accessory",
     "singular": false,
     "orderable": false,
@@ -14,11 +14,8 @@
             "accessorytype": {
                 "title": "Accessory Type",
                 "type": "string",
+                "default": "Light",
                 "oneOf": [
-                    {
-                    "title": "Door",
-                    "enum": ["Door"]
-                    },
                     {
                     "title": "Light",
                     "enum": ["Light"]
