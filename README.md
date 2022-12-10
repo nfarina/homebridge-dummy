@@ -37,6 +37,21 @@ The default behavior of a dummy switch is to turn itself off one second after be
 
 ```
 
+## Dimmer Switches
+
+By default, switches are toggle switches (on/off). You can configure your switch to be a dimmer switch, instead, storing a brightness value between 0 and 100. This can be done by passing the 'dimmer' argument in your config.json:
+
+```
+    "accessories": [
+        {
+          "accessory": "DummySwitch",
+          "name": "My Stateful Switch 1",
+          "dimmer": true
+        }
+    ]
+
+```
+
 ## Reverse Switches
 
 You may also want to create a dummy switch that turns itself on one second after being turned off. This can be done by passing the 'reverse' argument in your config.json:
