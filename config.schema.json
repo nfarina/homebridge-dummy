@@ -16,6 +16,12 @@
                 "default": false,
                 "description": "The switch remains on instead of being automatically turned off."
             },
+            "dimmer": {
+                "title": "Dimmer",
+                "type": "boolean",
+                "default": false,
+                "description": "Make the switch a dimmer instead of a toggle (on/off) switch"
+            },
             "reverse": {
                 "title": "Reverse",
                 "type": "boolean",
@@ -39,6 +45,14 @@
                 "type": "boolean",
                 "default": false,
                 "description": "The timer will reset each time the switch is turned on. "
+            },
+            "brightness": {
+                "title": "Brightness",
+                "type": "integer",
+                "default": 0,
+                "placeholder": 0,
+                "maximum": 100,
+                "description": "Starting brightness (dimmer only)"
             },
             "disableLogging": {
                 "title": "DisableLogging",
