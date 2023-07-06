@@ -1,5 +1,6 @@
 
-# "Dummy Switches" Plugin
+# EXPERIMENTAL FORK of @Nfarina's "Dummy Switches" Plugin
+#NOTICE: AS LONG AS YOU CAN READ THIS NOTICE, DO NOT INSTALL IF YOU DON'T KNOW WHAT YOU ARE DOING
 
 Example config.json:
 
