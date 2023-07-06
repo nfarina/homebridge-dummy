@@ -1,66 +1,197 @@
 {
-    "pluginAlias": "DummySwitch",
+	"pluginAlias": "DummySwitch",
     "pluginType": "accessory",
     "singular": false,
     "schema": {
-        "type": "object",
+	    "type": "object",
         "properties": {
             "name": {
                 "title": "Name",
+				"description": "Select name of the sensor.",
                 "type": "string",
                 "required": true
             },
-            "stateful": {
-                "title": "Stateful",
-                "type": "boolean",
-                "default": false,
-                "description": "The switch remains on instead of being automatically turned off."
+            "type": {
+                "title": "Type",
+                "description": "Select type of the sensor.",
+                "type": "string",
+                "default": "switch",
+                "required": true,
+                "oneOf": [
+                  { "title": "Switch", "enum": ["switch"] },
+                  { "title": "Dimmer", "enum": ["dimmer"] },
+                  { "title": "Blind", "enum": ["blind"] },
+				  { "title": "Motion", "enum": ["motion"] },
+				  { "title": "Lock", "enum": ["lock"] },
+				  { "title": "Contact", "enum": ["contact"] },
+				  { "title": "Security", "enum": ["security"] },
+				  { "title": "Thermostat", "enum": ["thermostat"] }
+                ]
             },
-            "dimmer": {
-                "title": "Dimmer",
-                "type": "boolean",
-                "default": false,
-                "description": "Make the switch a dimmer instead of a toggle (on/off) switch"
+			"startup": {
+                "title": "After startup",
+                "description": "Select sensor state after startup.",
+                "type": "string",
+                "default": "off",
+                "required": true,
+                "oneOf": [
+                  { "title": "Set Off", "enum": ["off"] },
+                  { "title": "Set On", "enum": ["on"] },
+                  { "title": "Set Value", "enum": ["setValue"] },
+				  { "title": "Last used value", "enum": ["last"] }
+                ]
+            },		
+            "startupValue": {
+                "title": "Value",
+                "type": "integer", 
+				"default": 0,
+                "maximum": 100,
+                "description": "Override starting value. 0 = disabled.",
+	            "condition": {
+	              "functionBody": "return ((model.type === 'dimmer' || model.type === 'blind') && (model.startup === 'setValue'));"
+	            }
             },
-            "reverse": {
-                "title": "Reverse",
+            "timerEnabled": {
+                "title": "Enable timer",
                 "type": "boolean",
-                "default": false,
-                "description": "The switch's default state is on."
-            },
-            "time": {
-                "title": "Time",
-                "type": "number",
-                "default": 1000,
-                "description": "The switch will turn off after this number of milliseconds. Not used if the switch is stateful."
-            },
-            "random": {
-                "title": "Random",
-                "type": "boolean",
-                "default": false,
-                "description": "Randomize the time until a switch turns off. Not used if the switch is stateful."
+                "default": true,
+                "description": "Disable timer if sensor should remain it's state."
             },
             "resettable": {
                 "title": "Resettable",
                 "type": "boolean",
                 "default": false,
-                "description": "The timer will reset each time the switch is turned on. "
+                "description": "Reset timer on each activity.",
+	            "condition": {
+	              "functionBody": "return model.timerEnabled === true;"
+	            }
             },
-            "brightness": {
-                "title": "Brightness",
-                "type": "integer",
-                "default": 0,
-                "placeholder": 0,
-                "maximum": 100,
-                "description": "Starting brightness (dimmer only)"
+            "time": {
+                "title": "Time",
+                "type": "number",
+                "default": 1,
+                "description": "Sensor will change state after this time.",
+	            "condition": {
+	              "functionBody": "return model.timerEnabled === true;"
+	            }
+            },
+            "timeUnit": {
+                "title": "Time Unit",
+                "description": "",
+                "type": "string",
+                "default": "seconds",
+                "required": true,
+                "oneOf": [
+                  { "title": "Miliseconds", "enum": ["miliseconds"] },
+                  { "title": "Seconds", "enum": ["seconds"] },
+                  { "title": "Minutes", "enum": ["minutes"] },
+				  { "title": "Hours", "enum": ["hours"] },
+				  { "title": "Days", "enum": ["days"] }
+                ],
+	            "condition": {
+	              "functionBody": "return model.timerEnabled === true;"
+	            }
+            },
+            "random": {
+                "title": "Random",
+                "type": "boolean",
+                "default": false,
+                "description": "Randomize the time.",
+	            "condition": {
+	              "functionBody": "return model.timerEnabled === true;"
+	            }
+            },
+            "reverse": {
+                "title": "Reverse",
+                "type": "boolean",
+                "default": false,
+                "description": "Reverse sensor operation.",
+	            "condition": {
+	              "functionBody": "return model.timerEnabled === true;"
+	            }
             },
             "disableLogging": {
                 "title": "DisableLogging",
                 "type": "boolean",
                 "default": false,
-                "description": "No state change information (On/Off) will be logged. "
+                "description": "No state change information (On/Off) will be logged."
             }
 
         }
-    }
+    },
+    "layout": [		
+		{
+			"type": "fieldset",
+			"title": "General",
+			"description": "",
+			"expandable": false,
+			"expanded": true,
+			"items": [ 
+				{
+					"type": "flex",
+					"flex-flow": "row wrap",
+					"items": ["name", "type"]
+				}
+  
+			]
+		},
+	    {
+			"type": "fieldset",
+			"title": "After start",
+			"description": "",
+			"expandable": false,
+			"expanded": true,
+			"items": [	
+				{
+					"type": "flex",
+					"flex-flow": "row wrap",
+					"items": ["startup", "startupValue"]
+				}	  
+				
+			]
+		},
+	    {
+			"type": "fieldset",
+			"title": "Timer",
+			"description": "",
+			"expandable": false,
+			"expanded": true,
+			"items": [		  
+				{
+					"type": "flex",
+					"flex-flow": "row wrap",
+					"items": ["timerEnabled", "resettable"]
+				},
+
+				{
+					"type": "flex",
+					"flex-flow": "row wrap",
+					"items": ["time", "timeUnit"]
+				},
+
+				{
+					"type": "flex",
+					"flex-flow": "row wrap",
+					"items": ["random", "reverse"]
+				}	  
+			]
+		}, 
+		{
+			"type": "fieldset",
+			"title": "Logs",
+			"description": "",
+			"expandable": false,
+			"expanded": true,
+			"items": [
+				{
+					"type": "flex",
+					"flex-flow": "row wrap",
+					"items": ["disableLogging", ""]
+				}
+			]
+		}
+	]
 }
+
+
+
