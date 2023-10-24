@@ -489,11 +489,7 @@ DummySwitch.prototype._setValue = function(value, callback) {
 		
 	}
 	
-	
-	
 
-	
-	
 	// Set Timer
 	if (this.timerEnabled) {	
 
