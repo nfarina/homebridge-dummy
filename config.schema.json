@@ -69,7 +69,7 @@
 		"time": {
 			"title": "Time",
 			"type": "number",
-			"default": 1,
+			"default": 1000,
 			"description": "Sensor will change state after this time.",
 			"condition": {
 				"functionBody": "return model.timerEnabled === true;"
@@ -79,7 +79,7 @@
 			"title": "Time Unit",
 			"description": "",
 			"type": "string",
-			"default": "seconds",
+			"default": "miliseconds",
 			"required": true,
 			"oneOf": [
 				{ "title": "Miliseconds", "enum": ["miliseconds"] },
