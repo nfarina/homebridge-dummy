@@ -1,6 +1,6 @@
 {
   "name": "homebridge-dummy",
-  "version": "0.9.1",
+  "version": "1.0.0",
   "description": "Dummy switches for Homebridge: https://github.com/nfarina/homebridge",
   "license": "ISC",
   "keywords": [
